@@ -1,6 +1,7 @@
 package be.phury.resizeme;
 
 import static spark.Spark.get;
+import static spark.Spark.setPort;
 
 import java.awt.image.BufferedImage;
 
@@ -21,6 +22,10 @@ public class ResizemeServer {
 	 * Starts the server instance.
 	 */
 	public ResizemeServer() {
+		
+		/* get the port from env properties for heroku */
+		setPort(Integer.parseInt(System.getenv("PORT")));
+		
 		get(new Route("/resize") {
 			@Override
 			public Object handle(Request request, Response response) {
